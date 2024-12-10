@@ -22,7 +22,7 @@ void DatNuoc::xuat() {
         cout << "---------------------------------------" << endl;
     }
 
-DatNuoc::DatNuoc(string tennhanvien, int soloainuoc = 0, int TongTien = 0)
+DatNuoc::DatNuoc(string tennhanvien, int soloainuoc, int TongTien)
 			: DichVu(tennhanvien), NumberOfType(soloainuoc), totalprice(TongTien) {
 			setNgayBan(ngayban);
 			setGioBan(gioban);
