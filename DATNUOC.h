@@ -19,7 +19,7 @@ class DatNuoc: public DichVu {
 		int *watercode;//tao ra nhieu don dat dat nuoc moi don moi loai nuoc
 
 	public:
-	
+
 	DatNuoc(string tennhanvien, int soloainuoc = 0, int TongTien = 0);
 	~DatNuoc();
 	DatNuoc(const DatNuoc* dn);
@@ -48,7 +48,7 @@ class DatNuoc: public DichVu {
 
 // Hàm thiết lập tổng tiền
 	void setTotalPrice(int total);
-		
+	int& getTotalPrice();
 	void xuat();
 
 
