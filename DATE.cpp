@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Date::Date(string ngay = ""):ngay(ngay){}
+Date::Date(string ngay):ngay(ngay){}
 
 Date::Date(const Date*date){
         ngay = date->ngay;
