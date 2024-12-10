@@ -1,4 +1,4 @@
-#include "USER.h"
+#include "User.h"
 #include <iostream>
 #include <limits>
 #include <sstream>
@@ -7,27 +7,27 @@
 
 using namespace std;
 
-// Constructor initialization with default values for username and password
-User::User(const string& username, const string& password,const string& phonenumber, int gender, const Date& ngsinh,int usertype) 
- :username(username), password(password), isLoggedIn(false),sdt(phonenumber),gioitinh(gender),ngaysinh(ngsinh),loaiTaiKhoan(usertype){
+// Constructor voi list khoi tao
+User::User(const string& username, const string& password, const string& phonenumber, int gender, const Date& ngsinh, int usertype) 
+    : username(username), password(password), isLoggedIn(false), sdt(phonenumber), gioitinh(gender), ngaysinh(ngsinh), loaiTaiKhoan(usertype) {
     if (!ktsdt(sdt)) 
         throw invalid_argument("Loi So Dien Thoai!");
-    if(gioitinh!=0&&gioitinh!=1)
-        throw invalid_argument("Loi Gioi Tinh!");//check dieu kien neu gioi tinh khac 0 hoac 1
+    if(gioitinh != 0 && gioitinh != 1)
+        throw invalid_argument("Loi Gioi Tinh!"); // Check gioi tinh neu khac 0 hoac 1
     setNgaysinh(ngsinh);
- }
-
-// Default constructor
-User::User():username("default_username"),password("default_password"), isLoggedIn(false),sdt(""),gioitinh(0),ngaysinh("01/01/2000"){
 }
 
+// Constructor mac dinh
+User::User() : username("default_username"), password("default_password"), isLoggedIn(false), sdt(""), gioitinh(0), ngaysinh("01/01/2000") {}
 
-// Login method (password is now securely handled)
-// Ví dụ sử dụng mã hóa bcrypt (cần thư viện bcrypt++)
+// Destructor
+User::~User() {
+    // Destructor mac dinh
+}
 
-
+// Phuong thuc dang nhap
 bool User::DangNhap(const string& user, const string& pass) {
-    if (username == user && password==pass) {
+    if (username == user && password == pass) {
         isLoggedIn = true;
         cout << "Dang nhap thanh cong.\n";
         return true;
@@ -36,26 +36,25 @@ bool User::DangNhap(const string& user, const string& pass) {
     return false;
 }
 
-
-// Logout method
+// Phuong thuc dang xuat
 void User::DangXuat() {
     isLoggedIn = false;
     cout << "Dang xuat thanh cong.\n";
 }
 
-// Check if user is logged in
+// Kiem tra trang thai dang nhap
 bool User::DaDangNhap() const {
     return isLoggedIn;
 }
 
-// Register method (with input validation)
-void User::DangKy(const string &user, const string &pass, const string &phonenumber, int gender, const Date& ngsinh,int loaiTK) {
+// Phuong thuc dang ky
+void User::DangKy(const string& user, const string& pass, const string& phonenumber, int gender, const Date& ngsinh, int loaiTK) {
     if (user.empty() || pass.empty()) {
-        cout << "Username and password cannot be empty.\n";
+        cout << "Ten dang nhap va mat khau khong duoc de trong!\n";
         return;
     }
     if (!ktsdt(phonenumber)) {
-        cout << "Invalid phone number.\n";
+        cout << "Loi so dien thoai.\n";
         return;
     }
     username = user;
@@ -63,25 +62,65 @@ void User::DangKy(const string &user, const string &pass, const string &phonenum
     sdt = phonenumber;
     gioitinh = gender;
     ngaysinh = ngsinh;
-    loaiTaiKhoan=loaiTK;
+    loaiTaiKhoan = loaiTK;
     cout << "Dang ky thanh cong.\n";
 }
 
-
-// Destructor - nothing to clean up for this class
-User::~User() {
-    // Default destructor
+// Kiem tra so dien thoai hop le
+bool User::ktsdt(const string& phonenumber) {
+    return phonenumber.length() == 10 && phonenumber[0] == '0' && all_of(phonenumber.begin(), phonenumber.end(), ::isdigit);
 }
 
-// Getter và Setter
+// Phuong thuc doi mat khau
+void User::DoiMKhau() {
+    string oldpass;
+    while (true) {
+        cout << "Nhap mat khau cu: ";
+        cin >> oldpass;
+        if (oldpass == password) break;   
+        cout << "Mat khau chua dung. Vui long nhap lai!\n";    
+    }
+
+    string newpass;
+    while (true) {
+        cout << "Nhap mat khau moi (KHONG chua dau cach): ";
+        cin >> newpass;
+        string againpass;
+        cout << "Nhap lai mat khau: ";
+        cin >> againpass;
+
+        if (newpass == againpass) {
+            password = newpass;
+            cout << "Doi mat khau thanh cong!\n";
+            break;
+        } else {
+            cout << "Hai mat khau khong khop. Vui long nhap lai!\n";
+        }
+    }
+}
+
+// Phuong thuc xuat thong tin
+void User::xuatthongtin() const {
+    cout << "So dien thoai: " << sdt << endl;
+    cout << "Ho va ten: " << username << endl;
+    cout << "Gioi tinh: " << (gioitinh == 0 ? "Nam" : "Nu") << endl;
+    cout << "Ngay sinh: " << ngaysinh.GetNgay() << endl;
+    cout << "Loai tai khoan: " << loaiTaiKhoan << endl;
+}
+
+// Toan tu so sanh
+bool User::operator==(const User& nguoidung) {
+    return sdt == nguoidung.sdt;
+}
+
+// Getter va Setter cho cac thuoc tinh
 string User::getUsername() const {
     return username;
 }
 
-void User::setUsername(const string& tenndung) {
-    this->username=tenndung;
+void User::setUsername(const string& ten) {
+    this->username = ten;
 }
-
 
 string User::getSDT() const {
     return sdt;
@@ -95,61 +134,22 @@ string User::getNgaysinh() const {
     return ngaysinh.GetNgay();
 }
 
-void User::setNgaysinh(const Date& ngsinh){
+void User::setNgaysinh(const Date& ngsinh) {
     this->ngaysinh = ngsinh;
 }
-//getGioitinh,getQuoctinh
-// void User::Nhap(){
-//     cout << "Nhap ten tai khoan(ho ten): "; 
-//     getline(cin, username);  
-//     cout << "Nhap so dien thoai: ";
-//     cin >> sdt;
-//     cout << "Nhap ngay thang nam sinh: ";
-//     ngaysinh.SetNgay();
-//     cout << "Nhap gioi tinh: ";
-//     cin >> gioitinh; 
-// }
-bool User::ktsdt(const string& phonenumber) {
-    return phonenumber.length() == 10 && phonenumber[0] == '0' && all_of(phonenumber.begin(), phonenumber.end(), ::isdigit);
+
+void User::setGioiTinh(int gioitinh) {
+    this->gioitinh = gioitinh;
 }
 
-void User::DoiMKhau() {
-    string oldpass;
-    while (true) {
-        cout << "Nhập mật khẩu cũ: ";
-        cin >> oldpass;
-        if (oldpass == password) break;   
-        cout << "Mật khẩu chưa đúng. Vui lòng nhập lại!\n";    
-    }
-
-    string newpass;
-    while (true) {
-        cout << "Nhập mật khẩu mới (KHÔNG chứa dấu cách): ";
-        cin >> newpass;
-        string againpass;
-        cout << "Nhập lại mật khẩu: ";
-        cin >> againpass;
-
-        if (newpass == againpass) {
-            password = newpass;
-            cout << "Đổi mật khẩu thành công!\n";
-            break;
-        } else {
-            cout << "Hai mật khẩu không khớp. Vui lòng nhập lại!\n";
-        }
-    }
+int User::getGioiTinh() const {
+    return gioitinh;
 }
 
-
-// Phuong thuc Xuat Thong Tin
-void User::xuatthongtin() const {
-    cout << "Số điện thoại: "<<sdt<<endl;
-    cout <<"Họ và tên: "<< username<<endl;
-    cout << "Giới tính: "<<gioitinh<<endl;
-    cout<<"Ngày sinh: "<<ngaysinh.GetNgay()<<endl;
-    cout <<"Loại tài khoản: "<< loaiTaiKhoan<<endl;
+const int& User::getLoaiTK() const {
+    return loaiTaiKhoan;
 }
 
-bool User::operator==(const User& nguoidung){
-    return (sdt==nguoidung.sdt);
+void User::setLoaiTK(const int& loaitk) {
+    loaiTaiKhoan = loaitk;
 }
