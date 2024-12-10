@@ -17,7 +17,7 @@ void Date::SetNgay(){
     cout<<"(dd/mm/yyyy): ";
     cin >> newngay;
     if(ValidDate(newngay)==false){
-         cout << "Ngày tháng năm không hợp lệ vui lòng nhập lại!\n";
+         cout << "Ngay thang nam khong hop le! Vui long nhap lai!\n";
          t = 0;
     }
     else {t = 1;ngay = newngay;}
@@ -40,7 +40,7 @@ bool Date::ValidDate(const string& date) {
         month = stoi(date.substr(3, 2));
         year = stoi(date.substr(6, 4));
     } catch (...) {
-        cout << "Định dạng ngày không hợp lệ!\n";
+        cout << "Dinh dang ngay khong hop le!\n";
         return false;
     }
 
@@ -62,7 +62,7 @@ bool Date::ValidDate(const string& date) {
         }
     } else if (month == 4 || month == 6 || month == 9 || month == 11) { // Các tháng 30 ngày
         if (day > 30) {
-            cout << "Tháng " << month << " chỉ có 30 ngày!\n";
+            cout << "Thang " << month << " chi co 30 ngays!\n";
             return false;
         }
     }
