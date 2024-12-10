@@ -11,128 +11,140 @@ using namespace std;
 
 // Giao diện menu
 vector<string> dangnhap = {
-    "Đăng ký",
-    "Đăng nhập",
-    "Kết thúc"
+    "DANG KY",
+    "DANG NHAP",
+    "THOAT"
 };
 //Sau khi đăng nhập thì loại người dùng nếu là nhân viên thì hiển thị hethong_nv
 vector<string> hethong_nv={//nhan vien chi coi duoc cac don dat san theo ngay chu ko duoc them don dat san
-    "Trang chủ",
-    "Các đơn đặt sân theo ngày",
-    "Thông tin tài khoản",
-    "Đăng xuất"
+    "TRANG CHU",
+    "CAC DON DAT SAN THEO NGAY",
+    "THONG TIN TAI KHOAN",
+    "DANG XUAT"
 };
 //Sau khi đăng nhập thì loại người dùng nếu là quản lý thì hiển thị hethong_ql
 vector<string> hethong_ql={
-    "Trang chủ",
-    "Các đơn đặt sân theo ngày",
-    "Thêm lịch đặt",
-    "Duyệt đơn",
-    "Thông tin tài khoản",
-    "Đăng xuất"
+    "TRANG CHU",
+    "CAC DON DAT SAN THEO NGAY",
+    "THEM LICH DAT SAN",
+    "DUYET DON",
+    "THONG TIN TAI KHOAN",
+    "DANG XUAT"
 };
 
 // nếu trong hethong_ql chọn trang chủ thì hiện trangchu_ql
 vector<string> trangchu_ql = {
-    "Trạng thái sân",
-    "Dịch vụ (Bán nước, giữ xe)",
-    "Quản lý kho",
-    "Quản lý khách hàng",//them khach hang va xep hang thanh vien
-    "Quản lý nhân viên",
-    "Doanh thu và lợi nhuận",
-    "Quay lại"
+    "TRANG THAI SAN",
+    "DICH VU (BAN NUOC, GIU XE)",
+    "QUAN LY KHO",
+    "QUAN LY KHACH HANG", //them khach hang va xep hang thanh vien
+    "QUAN LY NHAN VIEN",
+    "DOANH THU VA LOI NHAN",
+    "QUAY LAI"
+
 };
 //trong trangchu của cả nhân viên và quản lý nếu chọn bán nước thì hiện Giao diện cho dịch vụ bán nước và giữ xe
 vector<string> dichvu={
-    "Thêm đơn bán nước",
-    "Các đơn bán nước theo ngày",
-    "Thêm vé giữ xe",
-    "Các vé giữ xe theo ngày",
-    "Quay lại"
+    "THEM DON BAN NUOC",
+    "CAC DON BAN NUOC THEO NGAY",
+    "THEM VE GIU XE",
+    "CAC VE GIU XE THEO NGAY",
+    "QUAY LAI"
 };//nhập ngày cần xem sau khi xuất các đơn đặt nước thì tìm kiếm theo giờ 
 
 //Sau khi chọn lựa chọn các đơn đặt nước hoặc giữ xe theo ngày thì yêu cầu khách hàng nhập ngày sau đó mới hiển tị menu cacdondichvutheongay
 vector<string> cacdondichvutheongay={
-    "Xóa",
-    "Cập nhật",
-    "Tìm kiếm",
-    "Quay lại"
+    "XOA",
+    "CAP NHAT",
+    "TIM KIEM",
+    "QUAY LAI"
+
 };
 
 //Menu quản lý kho của quản lý
 vector<string> quanlykho={
-    "Trạng thái kho",
-    "Nhập lô hàng",
-    "Quay lại"
+    "TRANG THAI KHO",
+    "NHAP LO HANG",
+    "QUAY LAI"
+
 };
 
 //Menu quản lý khách hàng của quản lý
 vector<string> quanlykh={
-    "Danh sách khách hàng",
-    "Thêm khách hàng",
-    "Quay lại"
+    "DANH SACH KHACH HANG",
+    "THEM KHACH HANG",
+    "QUAY LAI"
+
 };
 
 //sau khi chọn danh sách khách hàng thì xuất thông tin các khách hàng và hiển thị menu danhsachkhachhang
 vector<string> danhsachkhachhang={
-    "Xóa khách hàng",
-    "Cập nhật hạng khách hàng",
-    "Tìm kiếm khách hàng",
-    "Quay lại"
+    "XOA KHACH HANG",
+    "CAP NHAT HANG KHACH HANG",
+    "TIM KIEM KHACH HANG",
+    "QUAY LAI"
+
 };
 
 //Menu quản lý nhân viên của quản lý
 vector<string> quanlynv={
-    "Danh sách nhân viên",
-    "Thêm nhân viên",
-    "Quay lại"
+    "DANH SACH NHAN VIEN",
+    "THEM NHAN VIEN",
+    "QUAY LAI"
+
 };
 vector<string> danhsachnhanvien={
-    "Xóa nhân viên",
-    "Cập nhật thông tin nhân viên",
-    "Tìm kiếm nhân viên",
-    "Quay lại"
+   "XOA NHAN VIEN",
+   "CAP NHAT THONG TIN NHAN VIEN",
+   "TIM KIEM NHAN VIEN",
+   "QUAY LAI"
+
 };
 //Menu doanh thu và lợi nhuận của quản lý
 vector<string> doanhthu={
-    "Thống kê ngày",
-    "Thống kê tháng",
-    "Thống kê quý",
-    "Thống kê năm",
-    "Quay lại"
+    "THONG KE NGAY",
+    "THONG KE THANG",
+    "THONG KE QUA",
+    "THONG KE NAM",
+    "QUAY LAI"
+
 };
 
 // Giao diện menu trang chủ cho nhân viên
 vector<string> trangchu_nhanvien = {
-    "Trạng thái sân",
-    "Dịch vụ (Bán nước, giữ xe)",
-    "Thông tin tài khoản",
-    "Đăng xuất"
+    "TRANG THAI SAN",
+    "DICH VU (BAN NUOC, GIU XE)",
+    "THONG TIN TAI KHOAN",
+    "DANG XUAT"
+
 };
 
 
 // Giao diện menu chính cho khách hàng
 vector<string> Mainmenu1 = {
-    "Đặt lịch",
-    "Thông tin tài khoản",
-    "Các đơn đặt sân",
-    "Đăng xuất"
+    "DAT LICH",
+    "THONG TIN TAI KHOAN",
+    "CAC DON DAT SAN",
+    "DANG XUAT"
+
 };
 
 //Sau khi khách hàng xem thông tin tài khoản thì mới hiển thị menu capnhatthongtintk
 vector<string> capnhatthongtin={//áp dụng cho cả nhân viên, khách hàng và quản lý nhân viên của quản lý
-    "Cập nhật username",
-    "Cập nhật số điện thoại",
-    "Cập nhật giới tính",
-    "Cập nhật ngày sinh",
-    "Đổi mật khẩu",
-    "Quay lại"
+    "CAP NHAT USERNAME",
+    "CAP NHAT SO DIEN THOAI",
+    "CAP NHAT GIOI TINH",
+    "CAP NHAT NGAY SINH",
+    "DOI MAT KHAU",
+    "QUAY LAI"
+
 };
 
 vector<string> loaingdung={
-    "Khách hàng",
-    "Nhân viên",
-    "Quản lý"
+    "KHACH HANG",
+    "NHAN VIEN",
+    "QUAN LY"
+
 };
 
 
@@ -143,13 +155,13 @@ void clearScreen(){
 
 void DN(){
     cout << "\n================================" << endl;
-    cout << "           Đăng nhập          " << endl;
+    cout << "           DANG NHAP           " << endl;
     cout << "================================" << endl;
 }
 
 void DK(){
     cout << "\n================================" << endl;
-    cout << "           Đăng ký            " << endl;
+    cout << "           DANG KY            " << endl;
     cout << "================================" << endl;
 }
 
@@ -163,7 +175,7 @@ int menuDangNhap(const vector<string>& menu) {
     while (true) {
         clearScreen();
         cout << "==============================" << endl;
-        cout << "    CHÀO MỪNG ĐẾN HỆ THỐNG    " << endl;
+        cout << "    CHAO MUNG DEN VOI HE THONG    " << endl;
         cout << "==============================" << endl;
         for (int i = 0; i < len; i++) {
             if (i == luaChon)
@@ -195,9 +207,9 @@ int menuKhachHang(const vector<string>& menu) {
 
     while (true) {
         clearScreen();
-        cout << "~o~o~~Chào mừng đến với sân bóng đá Emiraté~~o~o~"<<endl;
+        cout << "~o~o~~CHAO MUNG DEN VOI SAN BONG DA EMIRATE~~o~o~"<<endl;
         cout << "\n==============================" << endl;
-        cout << "       Menu Khách hàng       " << endl;
+        cout << "           BANG LUA CHON       " << endl;
         cout << "==============================" << endl;
         
         for (int i = 0; i < len; i++) {
@@ -229,9 +241,9 @@ int menuNhanVien(const vector<string>& menu) {
 
     while (true) {
         clearScreen();
-        cout << "~o~o~~Chào mừng đến với sân bóng đá Emiraté~~o~o~"<<endl;
+        cout << "~o~o~~CHAO MUNG DEN VOI SAN BONG DA EMIRATE~~o~o~"<<endl;
         cout << "\n==============================" << endl;
-        cout << "       Menu Nhân viên         " << endl;
+        cout << "       BANG LUA CHON         " << endl;
         cout << "==============================" << endl;
         
         for (int i = 0; i < len; i++) {
@@ -262,9 +274,9 @@ int menuQuanLy(const vector<string>& menu) {
 
     while (true) {
         clearScreen();
-        cout << "~o~o~~Chào mừng đến với sân bóng đá Emiraté~~o~o~"<<endl;
+        cout << "~o~o~~CHAO MUNG DEN VOI SAN BONG DA EMIRATE~~o~o~"<<endl;
         cout << "\n==============================" << endl;
-        cout << "         Menu Quản lý         " << endl;
+        cout << "         BANG LUA CHON         " << endl;
         cout << "==============================" << endl;
         
         for (int i = 0; i < len; i++) {
@@ -341,7 +353,7 @@ int main() {
         while (true) {
             choice=menuDangNhap(dangnhap);
             if (choice == 2) { // Quay lại loại người dùng
-                cout << "Cảm ơn bạn đã sử dụng hệ thống!\n";
+                cout << "CAM ON VI DA SU DUNG HE THONG!\n";
                 return 0;
             }
             // Đăng ký tài khoản
@@ -369,7 +381,7 @@ int main() {
                     }
                 } else if(ff==0){
                     string fileName;
-                    cout << "Nhập tên file chứa thông tin tài khoản (.txt): ";
+                    cout << "Nhap file du lieu: (.txt): ";
                     cin>>fileName; // Đọc tên file từ bàn phím
                     // Tự động thêm đuôi .txt nếu chưa có
                     if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".txt") {
@@ -379,7 +391,7 @@ int main() {
                     qlnd.DangKyTuFile(fileName);
 
                     // Hiển thị danh sách tài khoản đã đăng ký
-                    cout << "\nDanh sách tài khoản sau khi đăng ký:\n";
+                    cout << "\nDanh sach tai khoan sau khi dang ky:\n";
                     qlnd.HienThiDanhSach();
                     Continue();
 
@@ -390,13 +402,13 @@ int main() {
                 cin.ignore();
                 cout << "Username: ";
                 getline(cin, tenndung);
-                cout << "Password(KHÔNG chứa dấu cách): ";
+                cout << "Password(KHONG chua dau cach): ";
                 cin >> mkhau;
                 // qlnd.HienThiDanhSach();
                 User* user = qlnd.DangNhapTaiKhoan(tenndung, mkhau);
                 Continue();
                 if (user == nullptr) {
-                    cout << "Đăng nhập thất bại. Vui lòng thử lại!\n";
+                    cout << "Dang nhap that bai. Vui long thu lai!\n";
                     Continue();
                     continue;
                 }
@@ -412,7 +424,7 @@ int main() {
                             case 0:// Đặt lịch lẻ còn nếu muốn đặt cố định phải để cho quản lý đặt sân
                             { 
                                 Date ngaydat;
-                                cout << "Nhập ngày muốn đặt sân: ";
+                                cout << "Nhap ngay muon dat san: ";
                                 ngaydat.SetNgay();
                                 qlds.TrangThaiSanTheoNgay(ngaydat);
                                 kh->themDonDatsanLe(qlds);
@@ -430,7 +442,7 @@ int main() {
                                 if(ds!=nullptr){
                                     ds->xuat();
                                 }
-                                else{ cout << "Khách hàng chưa có đơn đặt sân nào!\n";}
+                                else{ cout << "Khach hang chua co don dat san nao!\n";}
                                 Continue();
                                 break;
                             }
@@ -454,7 +466,7 @@ int main() {
                             case 0:
                             {
                                 Date ngaydat;
-                                cout << "Nhập ngày muốn xem trạng thái sân: ";
+                                cout << "Nhap ngay muon xem trang thai san: ";
                                 ngaydat.SetNgay();
                                 qlds.TrangThaiSanTheoNgay(ngaydat);
                                 break;
@@ -467,9 +479,9 @@ int main() {
                             case 2:
                             {
                                 nv->xuatthongtin();
-                                cout << "Bạn có muốn cập nhật thông tin tài khoản không?(y/n)";
+                                cout << "Ban co muon cap nhat thong tin tai khoan?(C/K)";
                                 int i=_getch();
-                                if(i=='n'||i=='N'){break;}
+                                if(i=='k'||i=='K'){break;}
                             }
                         }
                         if (choice == 3) { // Go back
@@ -488,7 +500,7 @@ int main() {
                             case 0:
                             {
                                 Date ngaydat;
-                                cout << "Nhập ngày muốn xem trạng thái sân: ";
+                                cout << "Nhap ngay muon xem trang thai san: ";
                                 ngaydat.SetNgay();
                                 qlds.TrangThaiSanTheoNgay(ngaydat);
                                 break;
