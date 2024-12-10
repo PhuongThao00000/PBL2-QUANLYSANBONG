@@ -1,140 +1,84 @@
-#include "NHANVIEN.h"
+#include "NhanVien.h"
+#include <algorithm>
+#include <iostream>
 
-    
-    // Quản lý khách hàng
-    // void NhanVien::themKhachHang(KhachHang* kh) {
-    //     qlKhachHang.them(kh);
-    // }
+using namespace std;
 
-    // void NhanVien::xoaKhachHang(string sdt) {
-    //     qlKhachHang.xoa(sdt);
-    // }
+// Constructor mac dinh
+NhanVien::NhanVien() : User() {}
 
-    // void NhanVien::capNhatKhachHang(string sdt) {
-    //     qlKhachHang.capnhat(sdt);
-    // }
+// Constructor voi tham so
+NhanVien::NhanVien(const string& username, const string& password, const string& phonenumber, int gender, Date& ngsinh, int loaitk)
+    : User(username, password, phonenumber, gender, ngsinh, loaitk) {}
 
-    // void NhanVien::timKiemKhachHang(string sdt) {
-    //     qlKhachHang.timkiem(sdt);
-    // }
+// Destructor
+NhanVien::~NhanVien() {}
 
-    // // Quản lý đặt sân
-    // void NhanVien::themDatSanLe(string sdt) {
-    //     qlDatSan.themLe(sdt);
-    // }
+// Xuat thong tin NhanVien
+void NhanVien::xuatthongtin() const {
+    User::xuatthongtin();
+    cout << "Trang thai hoat dong: " << (DaDangNhap() == false ? "Offline" : "Online") << endl;
+}
 
-    // void NhanVien::themDatSanDinhKy(string sdt) {
-    //     qlDatSan.themDinhKy(sdt);
-    // }
-
-    // void NhanVien::xoaDatSan(string sdt) {
-    //     qlDatSan.xoa(sdt);
-    // }
-
-    // void NhanVien::capNhatDatSan(string sdt) {
-    //     qlDatSan.capnhat(sdt);
-    // }
-
-    // // Quản lý hóa đơn
-    // void NhanVien::themHoaDon(HoaDon* hd) {
-    //     qlHoaDon.them(hd);
-    // }
-
-    // void NhanVien::xoaHoaDon(string sdt) {
-    //     qlHoaDon.xoa(sdt);
-    // }
-
-    // void NhanVien::capNhatHoaDon(string sdt, string status) {
-    //     qlHoaDon.capnhatTrangThai(sdt, status);
-    // }
-
-    // void NhanVien::thongKeDoanhThu(string ngay) {
-    //     qlHoaDon.thongkeDoanhThuTheoNgayTuychon(qlDatNuoc); // Sử dụng thông tin từ QuanLyDatNuoc
-    // }
-
-    // Quản lý đặt nước
-    void NhanVien::themDatNuoc(QuanLyDatNuoc&qldn){
-        if (!isLoggedIn) {
-        throw runtime_error("Nhân viên chưa đăng nhập! Không thể thêm đơn bán nước.");
+// Quản lý đặt nước
+void NhanVien::themDatNuoc(QuanLyDatNuoc& qldn) {
+    if (!isLoggedIn) {
+        throw runtime_error("Nhan vien chua dang nhap! Khong the them don ban nuoc.");
     }
-        qldn.them(getUsername());
-    }
+    qldn.them(getUsername());
+}
 
-    DatNuoc* NhanVien::timkiemDatNuoc(QuanLyDatNuoc&qldn, const int& maDon){
-        if (!isLoggedIn) {
-        throw runtime_error("Nhân viên chưa đăng nhập! Không thể thực hiện tìm kiếm.");
+DatNuoc* NhanVien::timkiemDatNuoc(QuanLyDatNuoc& qldn, const int& maDon) {
+    if (!isLoggedIn) {
+        throw runtime_error("Nhan vien chua dang nhap! Khong the thuc hien tim kiem.");
     }
-        
-        return qldn.timkiem(maDon);
-    }
+    return qldn.timkiem(maDon);
+}
 
-    void NhanVien::capnhatDatNuoc(QuanLyDatNuoc&qldn, const int &maDon){
-        if (!isLoggedIn) {
-        throw runtime_error("Nhân viên chưa đăng nhập! Không thể sửa đơn bán nước.");
+void NhanVien::capnhatDatNuoc(QuanLyDatNuoc& qldn, const int& maDon) {
+    if (!isLoggedIn) {
+        throw runtime_error("Nhan vien chua dang nhap! Khong the sua don ban nuoc.");
     }
-        qldn.capnhat(maDon);
-    }
+    qldn.capnhat(maDon);
+}
 
-    void NhanVien::xoaDatNuoc(QuanLyDatNuoc&qldn,const int &maDon){
-        qldn.xoa(maDon);
-    }
+void NhanVien::xoaDatNuoc(QuanLyDatNuoc& qldn, const int& maDon) {
+    qldn.xoa(maDon);
+}
 
-    void NhanVien::xuatDatNuocTheoNgay(QuanLyDatNuoc&qldn,int day, int month, int year){
-        if (!isLoggedIn) {
-        throw runtime_error("Khách hàng chưa đăng nhập! Không thể xóa sân.");
+void NhanVien::xuatDatNuocTheoNgay(QuanLyDatNuoc& qldn, int day, int month, int year) {
+    if (!isLoggedIn) {
+        throw runtime_error("Khach hang chua dang nhap! Khong the xoa san.");
     }
-        qldn.xuattheongay(day,month,year);
-    }
-    void NhanVien::xuatthongtin()const{
-        User::xuatthongtin();
-        cout << "Trạng thái hoạt động: "<<(DaDangNhap()==false?"Offline":"Online")<<endl;
-    }
+    qldn.xuattheongay(day, month, year);
+}
 
-    void NhanVien::themDatXe(QuanLyDatXe&qldx){
-        if (!isLoggedIn) {
-        throw runtime_error("Nhân viên chưa đăng nhập! Không thể thêm đơn giữ xe.");
+// Quản lý giữ xe
+void NhanVien::themDatXe(QuanLyDatXe& qldx) {
+    if (!isLoggedIn) {
+        throw runtime_error("Nhan vien chua dang nhap! Khong the them don giu xe.");
     }
-        qldx.them(getUsername());
-    }
+    qldx.them(getUsername());
+}
 
-    DatXe* NhanVien::timkiemDatXe(QuanLyDatXe&qldx, const int& maDon){
-        if (!isLoggedIn) {
-        throw runtime_error("Nhân viên chưa đăng nhập! Không thể thực hiện tìm kiếm.");
+DatXe* NhanVien::timkiemDatXe(QuanLyDatXe& qldx, const int& maDon) {
+    if (!isLoggedIn) {
+        throw runtime_error("Nhan vien chua dang nhap! Khong the thuc hien tim kiem.");
     }
-        return qldx.timkiem(maDon);
-    }
+    return qldx.timkiem(maDon);
+}
 
-    void NhanVien::capnhatGiuXe(QuanLyDatXe&qldx,const int &maDon){
-        if (!isLoggedIn) {
-        throw runtime_error("Nhân viên chưa đăng nhập! Không thể sửa đơn bán nước.");
+void NhanVien::capnhatGiuXe(QuanLyDatXe& qldx, const int& maDon) {
+    if (!isLoggedIn) {
+        throw runtime_error("Nhan vien chua dang nhap! Khong the sua don giu xe.");
     }
-        qldx.capnhat(maDon);
-    }
+    qldx.capnhat(maDon);
+}
 
-    void NhanVien::xoaGiuXe(QuanLyDatXe&qldx,const int &maDon){
-                qldx.xoa(maDon);
-    }
+void NhanVien::xoaGiuXe(QuanLyDatXe& qldx, const int& maDon) {
+    qldx.xoa(maDon);
+}
 
-    void NhanVien::xuatGiuXeTheoNgay(QuanLyDatXe&qldx,int day, int month, int year){
-        qldx.xuattheongay(day,month,year);
-    }
-
-// void QuanLyNhanVien::XoaNhanVien(const string& sdt) {
-//     auto x = danhSachNhanVien.begin();
-//     while(x!=nullptr){
-//         if(x->data->getSDT() == sdt){
-//             delete x;
-//             cout << "Nhan vien co sdt " << sdt << " da duoc xoa.\n";
-//         }
-        
-//     }
-// }
-// for (int i = 0; i < danhSachNhanVien.getSize(); i++) {
-//         if (danhSachNhanVien[i]->getID() == id) {
-//             delete danhSachNhanVien[i];
-//             danhSachNhanVien.remove(DanhSachNhanVien.find());
-//             cout << 
-//             return;
-//         }
-//     }
-//     cout << "Khong tim thay nhan vien co ID: " << id << endl;
+void NhanVien::xuatGiuXeTheoNgay(QuanLyDatXe& qldx, int day, int month, int year) {
+    qldx.xuattheongay(day, month, year);
+}
