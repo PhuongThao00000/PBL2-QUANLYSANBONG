@@ -80,7 +80,7 @@ const int& KhachHang::getRank() {
 // Xuat thong tin KhachHang
 void KhachHang::xuatthongtin() const {
     User::xuatthongtin();
-    cout << "Hang thanh vien(4:Member, 3:Dong, 2:Bac, 1:Vang): ";
+    cout << "Hang thanh vien(4:Thanh Vien, 3:Dong, 2:Bac, 1:Vang): ";
     if (rankMember == 0) cout << "Chua co hang\n";
     else { cout << rankMember; }
 }
